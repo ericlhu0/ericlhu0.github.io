@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eric Hu</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    body {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 5rem 2rem 5rem;
+      color: #333;
+    }
+    
+    /* Media query for mobile devices */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+      
+      nav {
+        display: none !important; /* Hide navigation on mobile */
+      }
+      
+      .bio-container, .work-item {
+        flex-direction: column !important;
+      }
+      
+      .bio-image, .work-image, .bio-text, .work-description {
+        width: 100% !important;
+        margin-bottom: 1.5rem;
+      }
+      
+      img {
+        max-width: 100%;
+        margin: 0 auto;
+      }
+    }
+    
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo h1 {
+      margin-bottom: 0;
+    }
+    
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #999;
+      display: flex;
+      align-items: center;
+      height: 100%;
+    }
+    
+    nav a.active {
+      color: #ff8800;
+    }
+    
+    h1, h2 {
+      margin-bottom: 1.5rem;
+    }
+    
+    section {
+      margin-bottom: 3rem;
+    }
+    
+    .about {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .bio-container {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .bio-text {
+      flex: 2;
+    }
+    
+    .bio-image {
+      flex: 1;
+      min-height: 200px;
+    }
+    
+    .work-item {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .work-image {
+      flex: 1;
+      min-height: 150px;
+    }
+    
+    .work-description {
+      flex: 2;
+    }
+
+    .page {
+      display: none;
+    }
+    
+    .page.active {
+      display: block;
+    }
+    
+    ul {
+      list-style-type: none;
+    }
+    
+    li {
+      margin-bottom: 0.75rem;
+    }
+
+    /* Hide actual link underlines and use custom styling */
+    a {
+      text-decoration: none;
+      color: #333;
+    }
+    
+    .project-link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <h1>Eric Hu</h1>
+    </div>
+    <nav>
+      <a href="#about" id="about-link" class="active">about</a>
+      <a href="#work" id="work-link">work</a>
+      <a href="#contact" id="contact-link">contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <div id="about" class="page active">
+      <div class="bio-container">
+        <h2>About</h2>
+        <div class="bio-text">
+          <p>I am a researcher based in [Location]. My work focuses on [brief description of your focus/specialty].</p>
+          <br>
+          <p>My interests lie in human-robot interaction and leveraging modern deep learning methods to accomplish that.</p>
+        </div>
+      </div>
+      <div class="bio-image">
+        <img src="/api/placeholder/300/300" alt="Eric Hu" />
+      </div>
+    </div>
+
+    <div id="work" class="page">
+      <h2>Work</h2>
+      <section>
+        <h2>Publications</h2>
+        <div class="work-item">
+          <div class="work-image">
+            <img src="limbrepo.png" alt="Publication thumbnail" style="width: 100%; height: auto" />
+          </div>
+          <div class="work-description">
+            <h3>Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving </h3>
+            <p>Publication title and description would go here, explaining the key concepts and findings of this work. ...</p>
+            <p>TL;DR: We propose a new algorithm for robot-assisted human limb manipulation, along with a environment playground for future work to test limb manipulation.</p>
+            <a href="#" class="project-link">View Publication</a>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Projects</h2>
+        <div class="work-item">
+          <div class="work-image">
+            <img src="mimic3d.png" alt="Project thumbnail" style="width: 100%; height: auto" />
+          </div>
+          <div class="work-description">
+            <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
+            <p>We present a new way to generate synthetic data for robot manipulation by replacing objects in existing robot trajectory demonstrations. ...</p>
+            <p>TL;DR: We generate new robotics data for deep learning by replacing the object manipulated by the robot by generating similar yet different objects.</p>
+            <a href="#" class="project-link">Project Page</a>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div id="contact" class="page">
+      <h2>Contact</h2>
+      <div class="contact-info">
+        <ul>
+          <li>Email: <a href="mailto:email@example.com">email@example.com</a></li>
+          <li>LinkedIn: <a href="https://linkedin.com/" target="_blank">linkedin.com/in/erichu</a></li>
+          <li>Twitter: <a href="https://twitter.com/" target="_blank">@erichudesign</a></li>
+        </ul>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // Simple navigation without page reload
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Update navigation active state
+        document.querySelectorAll('nav a').forEach(navLink => {
+          navLink.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Show the correct page
+        const targetId = this.getAttribute('href').substring(1);
+        document.querySelectorAll('.page').forEach(page => {
+          page.classList.remove('active');
+        });
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
