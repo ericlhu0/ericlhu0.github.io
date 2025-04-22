@@ -94,16 +94,16 @@
 
     .bio-container {
       display: flex;
-      flex-direction: column;
+      gap: 2rem;
     }
     
     .bio-text {
-      flex: 2;
+      flex: 5;
     }
     
     .bio-image {
       flex: 1;
-      min-height: 200px;
+      min-height: 150px;
     }
     
     .work-item {
@@ -132,24 +132,21 @@
     ul {
       list-style-type: none;
     }
-    
-    li {
-      margin-bottom: 0.75rem;
-    }
 
     /* Hide actual link underlines and use custom styling */
     a {
       text-decoration: none;
-      color: #333;
+      color: #ff8800;
     }
     
     .project-link {
       display: inline-block;
       margin-top: 1rem;
-      color: #333;
+      /* color: #333; */
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="logo">
@@ -163,63 +160,71 @@
   </header>
 
   <main>
-    <div id="about" class="page active">
+    <section id="about">
+      <h2>About</h2>
       <div class="bio-container">
-        <h2>About</h2>
         <div class="bio-text">
-          <p>I am a researcher based in [Location]. My work focuses on [brief description of your focus/specialty].</p>
-          <br>
-          <p>My interests lie in human-robot interaction and leveraging modern deep learning methods to accomplish that.</p>
+          <p>Hey! I'm a junior undergrad at Cornell, interested in robotics. Specifically, I'm interested in human-robot interaction and safety using deep learning methods. Please reach out to me if you have any research opportunities!</p>
+          <br />
+          <a href="mailto:ericlhu0@gmail.com">Email</a> / 
+          <a href="https://linkedin.com/in/ericlehaohu" target="_blank">LinkedIn</a>
+        </div>
+        <div class="bio-image">
+          <img src="profilepic.png" alt="Eric Hu" />
         </div>
       </div>
-      <div class="bio-image">
-        <img src="/api/placeholder/300/300" alt="Eric Hu" />
-      </div>
-    </div>
+    </section>
 
-    <div id="work" class="page">
+    <section id="work">
       <h2>Work</h2>
-      <section>
-        <h2>Publications</h2>
+      <div class="publications">
+        <h3>Publications</h3>
+        <br />
         <div class="work-item">
           <div class="work-image">
-            <img src="limbrepo.png" alt="Publication thumbnail" style="width: 100%; height: auto" />
+            <img src="limbrepo.png" alt="Project thumbnail" style="width: 100%; height: auto" />
           </div>
           <div class="work-description">
-            <h3>Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving </h3>
+            <h3>[Work in Progress] Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving </h3>
+            <br />
             <p>Publication title and description would go here, explaining the key concepts and findings of this work. ...</p>
+            <br />
             <p>TL;DR: We propose a new algorithm for robot-assisted human limb manipulation, along with a environment playground for future work to test limb manipulation.</p>
-            <a href="#" class="project-link">View Publication</a>
+            <a href="#" class="project-link">Coming Soon!</a>
           </div>
         </div>
-      </section>
+      </div>
 
-      <section>
-        <h2>Projects</h2>
+      <div class="projects">
+        <h3>Projects</h3>
+        <br />
         <div class="work-item">
           <div class="work-image">
-            <img src="mimic3d.png" alt="Project thumbnail" style="width: 100%; height: auto" />
+            <img src="mimic3d.png" alt="Publication thumbnail" style="width: 100%; height: auto" />
           </div>
           <div class="work-description">
             <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
+            <br />
             <p>We present a new way to generate synthetic data for robot manipulation by replacing objects in existing robot trajectory demonstrations. ...</p>
+            <br />
             <p>TL;DR: We generate new robotics data for deep learning by replacing the object manipulated by the robot by generating similar yet different objects.</p>
-            <a href="#" class="project-link">Project Page</a>
+            <a href="https://drive.google.com/file/d/1T6xi7_2llRFYZPdNGUbbfaxqd2jFLc_y/view?usp=sharing" class="project-link">Project Page</a>
           </div>
         </div>
-      </section>
-    </div>
+        
+      </div>
+    </section>
 
-    <div id="contact" class="page">
+    <section id="contact">
       <h2>Contact</h2>
       <div class="contact-info">
+        <h3>List of contact information</h3>
         <ul>
-          <li>Email: <a href="mailto:email@example.com">email@example.com</a></li>
-          <li>LinkedIn: <a href="https://linkedin.com/" target="_blank">linkedin.com/in/erichu</a></li>
-          <li>Twitter: <a href="https://twitter.com/" target="_blank">@erichudesign</a></li>
+          <li>Email: <a href="mailto:ericlhu0@gmail.com">ericlhu0@gmail.com</a></li>
+          <li>LinkedIn: <a href="https://linkedin.com/in/ericlehaohu" target="_blank">linkedin.com/in/ericlehaohu</a></li>
         </ul>
       </div>
-    </div>
+    </section>
   </main>
 
   <script>
