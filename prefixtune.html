@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mimic3D Project | Eric Hu</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+  <style>
+    :root {
+      --primary: #ff8800;
+      --secondary: black;
+      --text: #333;
+      --light-text: #777;
+      --bg: #fff;
+      --light-bg: #f5f5f5;
+      --dark-bg: #2c3e50;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    
+    body {
+      color: var(--text);
+      line-height: 1.6;
+      background-color: var(--bg);
+    }
+    
+    header {
+      background-color: white;
+      /* color: white; */
+      padding: 1rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+    
+    .logo h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    
+    nav {
+      display: flex;
+      align-items: center;
+    }
+    
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: black;
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+    
+    nav a:hover:after, nav a.active:after {
+      width: 100%;
+    }
+    
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      color: black;
+      text-decoration: none;
+    }
+    
+    .back-button:before {
+      content: '←';
+      margin-right: 0.5rem;
+    }
+    
+    .hero {
+      /* background: linear-gradient(to right, var(--dark-bg), #3498db); */
+      /* color: white; */
+      padding: 8rem 0 4rem 0;
+      text-align: center;
+    }
+    
+    .hero-container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    
+    .hero p {
+      font-size: 1.25rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto 1.5rem auto;
+    }
+    
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 1.5rem 0;
+    }
+    
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      background-color: rgba(255, 136, 0, 0.1);
+      color: var(--primary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .button {
+      display: inline-block;
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary);
+      color: black;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: var(--transition);
+      margin: 0.5rem;
+    }
+    
+    .button:hover {
+      background-color: #e67e00;
+      transform: translateY(-2px);
+    }
+    
+    .button.secondary {
+      background-color: transparent;
+      border: 2px solid white;
+    }
+    
+    .button.secondary:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    main {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 2rem;
+    }
+    
+    section {
+      margin-bottom: 4rem;
+    }
+    
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--secondary);
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+    
+    h2:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+      bottom: 0;
+      left: 0;
+    }
+    
+    h3 {
+      font-size: 1.4rem;
+      margin: 1.5rem 0 1rem 0;
+      color: var(--text);
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    li {
+      margin-bottom: 0.5rem;
+    }
+    
+    .image-container {
+      margin: 2rem 0;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .image-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .caption {
+      text-align: center;
+      font-style: italic;
+      color: var(--light-text);
+      margin-top: 0.5rem;
+    }
+    
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 2rem 0;
+    }
+    
+    .result-card {
+      /* background-color: var(--light-bg); */
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: var(--transition);
+    }
+    
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+    
+    .card-image {
+      width: 100%;
+      height: 200px;
+      background-color: #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--light-text);
+    }
+    
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .card-content {
+      padding: 1.5rem;
+    }
+    
+    .card-content h3 {
+      margin-top: 0;
+    }
+    
+    .quote {
+      background-color: var(--light-bg);
+      padding: 2rem;
+      border-left: 4px solid var(--secondary);
+      margin: 2rem 0;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+    }
+    
+    .quote p:last-child {
+      margin-bottom: 0;
+    }
+    
+    .technologies {
+      margin: 2rem 0;
+    }
+    
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+    
+    .tech-item {
+      /* background-color: var(--light-bg); */
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+    }
+    
+    .tech-item:before {
+      content: '•';
+      color: var(--primary);
+      margin-right: 0.5rem;
+      font-size: 1.2rem;
+    }
+    
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 2rem;
+    }
+    
+    .timeline:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 2px;
+      background-color: var(--light-bg);
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 2rem;
+    }
+    
+    .timeline-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .timeline-item:before {
+      content: '';
+      position: absolute;
+      left: -2rem;
+      top: 0.5rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 50%;
+      background-color: var(--secondary);
+    }
+    
+    .timeline-date {
+      font-weight: 600;
+      color: var(--secondary);
+      margin-bottom: 0.5rem;
+    }
+    
+    figure {
+      margin: 2rem 0;
+    }
+    
+    figcaption {
+      text-align: center;
+      color: var(--light-text);
+      font-style: italic;
+      margin-top: 0.5rem;
+    }
+    
+    code {
+      font-family: Monaco, Consolas, "Courier New", monospace;
+      background-color: var(--light-bg);
+      padding: 0.2rem 0.4rem;
+      border-radius: 3px;
+      font-size: 0.9rem;
+    }
+    
+    pre {
+      background-color: var(--light-bg);
+      padding: 1.5rem;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 1.5rem 0;
+    }
+    
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      border-radius: 0;
+      font-size: 0.9rem;
+    }
+    
+    .conclusion {
+      background-color: var(--light-bg);
+      padding: 2rem;
+      border-radius: 8px;
+      margin: 3rem 0;
+    }
+    
+    .conclusion h2:after {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .conclusion h2 {
+      text-align: center;
+    }
+    
+    .team {
+      margin: 3rem 0;
+    }
+    
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    
+    .team-member {
+      text-align: center;
+    }
+    
+    .team-member img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 1rem;
+    }
+    
+    .team-member h3 {
+      margin: 0.5rem 0;
+    }
+    
+    .team-member p {
+      font-size: 0.9rem;
+      color: var(--light-text);
+    }
+    
+    .contact-section {
+      text-align: center;
+      background-color: var(--light-bg);
+      padding: 3rem;
+      border-radius: 8px;
+      margin-top: 3rem;
+    }
+    
+    footer {
+      background-color: var(--dark-bg);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+    
+    .footer-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .footer-links {
+      margin: 1.5rem 0;
+    }
+    
+    .footer-links a {
+      color: #ddd;
+      text-decoration: none;
+      margin: 0 1rem;
+      transition: var(--transition);
+    }
+    
+    .footer-links a:hover {
+      color: white;
+    }
+    
+    .copyright {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      opacity: 0.7;
+    }
+    
+    @media screen and (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+      }
+      
+      nav {
+        margin-top: 1rem;
+      }
+      
+      nav a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .hero {
+        padding: 7rem 0 3rem 0;
+      }
+      
+      .hero h1 {
+        font-size: 2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .results-grid, .team-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .timeline {
+        padding-left: 1.5rem;
+      }
+      
+      .timeline-item:before {
+        left: -1.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <a href="index.html" class="back-button">Back to Portfolio</a>
+      </div>
+      <nav>
+        <a href="#overview" class="active">Overview</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#results">Results</a>
+        <a href="#tech">Technologies</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-container">
+      <h1>Mimic3D: Augmenting Robot Manipulation Training Data</h1>
+      <p>Expanding robotic manipulation capabilities through synthetic 3D object generation</p>
+      <div class="tags">
+        <span class="tag">3D Object Generation</span>
+        <span class="tag">Robot Manipulation</span>
+        <span class="tag">Data Augmentation</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">Generative AI</span>
+      </div>
+      <div>
+        <a href="https://drive.google.com/file/d/1T6xi7_2llRFYZPdNGUbbfaxqd2jFLc_y/view?usp=sharing" class="button" target="_blank">View Paper</a>
+        <a href="https://github.com/ericlhu0/r3d" class="button secondary" target="_blank">GitHub Repository</a>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="overview">
+      <h2>Project Overview</h2>
+      <p>The field of robotic manipulation faces a significant challenge: the need for diverse and extensive training data. Traditional approaches to data collection are time-consuming and resource-intensive, often limiting the generalization capabilities of learned policies to novel objects and scenarios.</p>
+      
+      <p>Mimic3D addresses this challenge by introducing a novel approach to generate synthetic data for robot manipulation by intelligently replacing objects in existing robot trajectory demonstrations with newly generated objects that share similar affordances.</p>
+      
+      <h3>Key Contributions</h3>
+      <ul>
+        <li>A novel methodology for generating synthetic robot manipulation data by replacing objects in existing demonstrations</li>
+        <li>An affordance-preserving object generation pipeline that ensures new objects can be grasped using the same trajectories</li>
+        <li>Comprehensive evaluation framework showing improved policy generalization to unseen objects</li>
+        <li>Open-source implementation to encourage further research in data augmentation for robotic manipulation</li>
+      </ul>
+    </section>
+    
+    <section id="methodology">
+      <h2>Methodology</h2>
+      <p>Our approach consists of three main components: object analysis, affordance-preserving object generation, and trajectory adaptation.</p>
+      
+      <h3>1. Object Analysis</h3>
+      <p>We begin by analyzing the original objects in the demonstration dataset to identify key affordance-related properties:</p>
+      <ul>
+        <li>Geometric features (size, shape, symmetry)</li>
+        <li>Grasp points and approach vectors</li>
+        <li>Physical properties (mass distribution, friction)</li>
+        <li>Functional parts that enable manipulation</li>
+      </ul>
+      
+      <h3>2. Affordance-Preserving Object Generation</h3>
+      <p>Using the extracted affordance properties, we generate new objects that maintain these critical features while varying non-essential aspects:</p>
+    
+      
+      <h3>3. Trajectory Adaptation</h3>
+      <p>After generating new objects, we adapt the original robot trajectories to account for subtle differences while preserving the overall manipulation strategy:</p>
+      <ol>
+        <li>Align the new object with the original object's reference frame</li>
+        <li>Map grasp points from the original to the new object</li>
+        <li>Adjust approach and manipulation paths as needed</li>
+        <li>Verify the feasibility of the adapted trajectory</li>
+      </ol>
+    </section>
+    
+    <section id="results">
+      <h2>Results & Findings</h2>
+      <p>We evaluated our approach through a series of experiments designed to test both the quality of generated objects and the performance of policies trained on our augmented dataset.</p>
+      
+      <h3>Object Generation Quality</h3>
+      <p>We assessed the quality of generated objects based on:</p>
+      <ul>
+        <li>Geometric similarity to original objects in affordance-critical regions</li>
+        <li>Diversity in non-critical regions</li>
+        <li>Physical plausibility and manufacturability</li>
+      </ul>
+      
+    </section>
+    
+    <section id="tech">
+      <h2>Technologies & Implementation</h2>
+      <p>Mimic3D leverages a combination of computer vision, deep learning, and robotics technologies:</p>
+      
+      <div class="technologies">
+        <h3>Core Technologies</h3>
+        <div class="tech-list">
+          <div class="tech-item">PyTorch</div>
+          <div class="tech-item">ROS (Robot Operating System)</div>
+          <div class="tech-item">NVIDIA Isaac Sim</div>
+          <div class="tech-item">Open3D</div>
+          <div class="tech-item">CUDA</div>
+          <div class="tech-item">Point Cloud Library (PCL)</div>
+        </div>
+      </div>
+      
+    </section>
+    
+    <div class="conclusion">
+      <h2>Conclusion & Future Work</h2>
+      <p>Mimic3D demonstrates a promising approach to generating high-quality synthetic data for robot manipulation learning. By preserving affordances while introducing variations in object geometry, we enable policies to better generalize to novel objects and scenarios.</p>
+      
+      <p>Future directions for this research include:</p>
+      <ul>
+        <li>Extending the approach to more complex multi-step manipulation tasks</li>
+        <li>Incorporating tactile and dynamic feedback in the affordance preservation process</li>
+        <li>Developing more sophisticated trajectory adaptation techniques for highly articulated objects</li>
+        <li>Exploring zero-shot transfer to entirely new object categories</li>
+        <li>Integrating language models to generate objects from text descriptions of affordances</li>
+      </ul>
+      
+      <p>We believe this work represents an important step toward more data-efficient and generalizable robot learning systems that can adapt to the diversity of objects encountered in real-world environments.</p>
+    </div>
+    
+    <section class="team">
+      <h2>Project Team</h2>
+      <div class="team-grid">
+        <div class="team-member">
+          <h3>Eric Hu</h3>
+          <p>Cornell University</p>
+        </div>
+        
+        <div class="team-member">
+          <h3>Adhitya Polavaram</h3>
+          <p>Cornell University</p>
+        </div>
+        
+        <div class="team-member">
+          <h3>Minh Nguyen</h3>
+          <p>Cornell University</p>
+        </div>
+      </div>
+    </section>
+    
+    <div class="contact-section">
+      <h2>Interested in Collaboration?</h2>
+      <p>We're actively looking for collaboration opportunities to extend this research. If you're interested in working with us or have questions about the project, please reach out!</p>
+      <a href="mailto:ericlhu0@gmail.com" class="button">Contact Me</a>
+    </div>
+  </main>
+
+  <!-- <footer>
+    <div class="footer-container">
+      <h3>Eric Hu</h3>
+      <p>Robotics Researcher at Cornell University</p>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#work">Projects</a>
+        <a href="index.html#skills">Skills</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+      <div class="copyright">
+        © 2025 Eric Hu | Last Updated: May 2025
+      </div>
+    </div>
+  </footer> -->
+
+  <script>
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Update navigation active state
+        document.querySelectorAll('nav a').forEach(navLink => {
+          navLink.classList.remove('active');
+        });
+        this.classList.add('active');
+        
+        // Smooth scroll to the section
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    
+    // Highlight active section on scroll
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      const scrollPosition = window.scrollY + 100;
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

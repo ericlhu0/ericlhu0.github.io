@@ -3,8 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eric Hu</title>
+  <title>Eric Hu | Robotics Researcher</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <style>
+    :root {
+      --primary: #ff8800;
+      --secondary: #2980b9;
+      --text: #333;
+      --light-text: #777;
+      --bg: #fff;
+      --light-bg: #f5f5f5;
+      --transition: all 0.3s ease;
+    }
+    
     * {
       margin: 0;
       padding: 0;
@@ -16,45 +27,17 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 4rem 5rem 2rem 5rem;
-      color: #333;
-    }
-    
-    /* Media query for mobile devices */
-    @media screen and (max-width: 768px) {
-      body {
-        padding: 2rem;
-      }
-      
-      nav {
-        display: none !important; /* Hide navigation on mobile */
-      }
-      
-      .bio-container, .work-item {
-        flex-direction: column !important;
-      }
-      
-      .bio-image, .work-image, .bio-text, .work-description {
-        width: 100% !important;
-        margin-bottom: 1.5rem;
-      }
-      
-      img {
-        max-width: 100%;
-        margin: 0 auto;
-      }
+      color: var(--text);
+      line-height: 1.6;
     }
     
     header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
-    }
-    
-    nav {
-      display: flex;
-      align-items: center;
-      height: 100%;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid #eee;
     }
     
     .logo {
@@ -64,85 +47,369 @@
     
     .logo h1 {
       margin-bottom: 0;
+      font-weight: 600;
     }
     
-    nav a {
-      margin-left: 1.5rem;
-      text-decoration: none;
-      color: #999;
+    nav {
       display: flex;
       align-items: center;
       height: 100%;
     }
     
-    nav a.active {
-      color: #ff8800;
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--light-text);
+      font-weight: 500;
+      transition: var(--transition);
+      padding: 0.5rem 0;
+      position: relative;
+    }
+    
+    nav a:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 0;
+      background-color: var(--primary);
+      transition: var(--transition);
+    }
+    
+    nav a:hover:after, nav a.active:after {
+      width: 100%;
+    }
+    
+    nav a:hover, nav a.active {
+      color: var(--primary);
+    }
+    
+    .mobile-menu-btn {
+      display: none;
+      font-size: 1.5rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text);
     }
     
     h1, h2 {
       margin-bottom: 1.5rem;
     }
     
-    section {
-      margin-bottom: 3rem;
+    h2 {
+      font-size: 2rem;
+      position: relative;
+      padding-bottom: 0.5rem;
     }
     
-    .about {
-      display: flex;
-      flex-direction: row;
+    h2:after {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 3px;
+      background-color: var(--primary);
+      bottom: 0;
+      left: 0;
     }
-
+    
+    h3 {
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+    
+    section {
+      margin-bottom: 5rem;
+      padding: 1rem 0;
+      scroll-margin-top: 2rem;
+    }
+    
+    p {
+      margin-bottom: 1rem;
+    }
+    
     .bio-container {
       display: flex;
-      gap: 2rem;
+      gap: 3rem;
+      align-items: flex-start;
     }
     
     .bio-text {
-      flex: 5;
+      flex: 3;
     }
     
     .bio-image {
       flex: 1;
-      min-height: 150px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .bio-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition);
+    }
+    
+    .bio-image img:hover {
+      transform: scale(1.05);
+    }
+    
+    .bio-image::before {
+      content: 'Photo';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      color: var(--light-text);
+      z-index: -1;
+    }
+    
+    .social-links {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .social-links a {
+      display: inline-flex;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      color: var(--secondary);
+      border: 1px solid var(--secondary);
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .social-links a:hover {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .card-link {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      border-radius: 8px;
+    }
+    
+    .cv-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.7rem 1.5rem;
+      background-color: var(--primary);
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+    
+    .cv-button:hover {
+      background-color: #e67e00;
+      transform: translateY(-2px);
+    }
+    
+    .section-divider {
+      margin: 2rem 0;
+      height: 1px;
+      background-color: #eee;
     }
     
     .work-item {
       display: flex;
-      gap: 2rem;
-      margin-bottom: 2rem;
+      gap: 2.5rem;
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      border-radius: 8px;
+      background-color: var(--light-bg);
+      transition: var(--transition);
+    }
+    
+    .work-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
     }
     
     .work-image {
       flex: 1;
       min-height: 150px;
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
     }
+    
+    .work-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: var(--transition);
+    }
+    
+    /* .work-image img:hover {
+      transform: scale(1.05);
+    } */
+    
+    /* .work-image::before {
+      content: 'Image';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg);
+      color: var(--light-text);
+      z-index: -1;
+    } */
     
     .work-description {
       flex: 2;
-    }
-
-    .page {
-      display: none;
-    }
-    
-    .page.active {
-      display: block;
-    }
-    
-    ul {
-      list-style-type: none;
-    }
-
-    /* Hide actual link underlines and use custom styling */
-    a {
-      text-decoration: none;
-      color: #ff8800;
     }
     
     .project-link {
       display: inline-block;
       margin-top: 1rem;
-      /* color: #333; */
+      padding: 0.5rem 1rem;
+      color: white;
+      background-color: var(--secondary);
+      text-decoration: none;
+      border-radius: 4px;
+      transition: var(--transition);
+    }
+    
+    .project-link:hover {
+      background-color: #1a6ea8;
+      transform: translateY(-2px);
+    }
+    
+    .contact-info {
+      background-color: var(--light-bg);
+      padding: 2rem;
+      border-radius: 8px;
+    }
+    
+    .contact-info ul {
+      list-style-type: none;
+    }
+    
+    .contact-info li {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+    }
+    
+    .contact-info li:before {
+      content: '→';
+      margin-right: 0.5rem;
+      color: var(--primary);
+    }
+    
+    .contact-info a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    .contact-info a:hover {
+      color: var(--primary);
+      text-decoration: underline;
+    }
+    
+    .tag {
+      display: inline-block;
+      font-size: 0.8rem;
+      background-color: rgba(255, 136, 0, 0.1);
+      color: var(--primary);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .skills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin: 1rem 0;
+    }
+    
+    footer {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--light-text);
+      font-size: 0.9rem;
+    }
+    
+    /* Media query for mobile devices */
+    @media screen and (max-width: 768px) {
+      body {
+        padding: 2rem;
+      }
+      
+      .mobile-menu-btn {
+        display: block;
+      }
+      
+      nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        height: 100vh;
+        background-color: var(--bg);
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 4rem 2rem;
+        transition: var(--transition);
+        z-index: 1000;
+      }
+      
+      nav.active {
+        right: 0;
+      }
+      
+      nav a {
+        margin: 0 0 1.5rem 0;
+        font-size: 1.2rem;
+      }
+      
+      .close-nav {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+      
+      .bio-container, .work-item {
+        flex-direction: column;
+      }
+      
+      .bio-image, .work-image {
+        width: 100%;
+        margin-bottom: 1.5rem;
+      }
+      
+      .bio-text, .work-description {
+        width: 100%;
+      }
     }
   </style>
 </head>
@@ -152,68 +419,140 @@
     <div class="logo">
       <h1>Eric Hu</h1>
     </div>
+    <button class="mobile-menu-btn">☰</button>
     <nav>
-      <a href="#about" id="about-link" class="active">about</a>
-      <a href="#work" id="work-link">work</a>
-      <a href="#contact" id="contact-link">contact</a>
+      <button class="close-nav">✕</button>
+      <a href="#about" class="active">About</a>
+      <a href="#work">Work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main>
     <section id="about">
-      <h2>About</h2>
+      <h2>About Me</h2>
       <div class="bio-container">
         <div class="bio-text">
-          <p>Hey! I'm a junior undergrad at Cornell, interested in robotics. Specifically, I'm interested in human-robot interaction and safety using deep learning methods. Please reach out to me if you have any research opportunities!</p>
-          <br />
-          <a href="mailto:ericlhu0@gmail.com">Email</a> / 
-          <a href="https://linkedin.com/in/ericlehaohu" target="_blank">LinkedIn</a>
+          <p>Hey there! I'm a junior undergraduate student at Cornell University. I'm currently interested in human-robot interaction and safety using deep learning methods!</p>
+          
+          <p>My academic journey is focused on developing algorithms and systems that enable robots to work safely alongside humans, particularly in caregiving and assistance scenarios. I'm constantly exploring new approaches to make robots more adaptive, safe, and personalized in their interactions.</p>
+          
+          <p>I'm actively looking for research opportunities where I can contribute to robotics research. If you're working on related projects or have opportunities available, I'd love to connect!</p>
+          
+          <div class="social-links">
+            <a href="mailto:ericlhu0@gmail.com">Email Me</a>
+            <a href="https://linkedin.com/in/ericlehaohu" target="_blank">LinkedIn</a>
+          </div>
+          
+          <!-- <a href="#" class="cv-button">Download CV</a> -->
         </div>
         <div class="bio-image">
-          <img src="profilepic.png" alt="Eric Hu" style="width: auto;"/>
+          <img src="profilepic.png" alt="Eric Hu" />
         </div>
       </div>
     </section>
+
+    <div class="section-divider"></div>
 
     <section id="work">
-      <h2>Work</h2>
-      <div class="publications">
-        <h3>Publications</h3>
-        <br />
-        <div class="work-item">
-          <div class="work-image">
-            <img src="limbrepo.png" alt="Project thumbnail" style="width: 100%; height: auto" />
+      <h2>Research & Projects</h2>
+      
+      <h3>Publications</h3>
+      <div class="work-item">
+        <a href="#" class="card-link" aria-label="View Safe and Personalized Human Limb Manipulation project"></a>
+        <div class="work-image">
+          <img src="limbrepo.png" alt="Limb manipulation research" />
+        </div>
+        <div class="work-description">
+          <h3>Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving</h3>
+          <p><em>Work in Progress</em></p>
+          <p>TL;DR: We propose a new algorithm for robot-assisted human limb manipulation, along with a environment for future work to test limb manipulation.</p>
+          <div class="skills-container">
+            <span class="tag">Model Predictive Control</span>
+            <span class="tag">Human-Robot Interaction</span>
+            <span class="tag">Safety Constraints</span>
           </div>
-          <div class="work-description">
-            <h3>[Work in Progress] Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving </h3>
-            <br />
-            <p>First, we show an MPC-based algorithm which allows the control of a robot arm to manipulate a human arm to a desired position, while ensuring safety and allowing for personalization. </p>
-            <br />
-            <p>TL;DR: We propose a new algorithm for robot-assisted human limb manipulation, along with a environment for future work to test limb manipulation.</p>
-            <a href="#" class="project-link">Coming Soon!</a>
-          </div>
+          <a href="#" class="project-link">Coming Soon!</a>
         </div>
       </div>
-
-      <div class="projects">
-        <h3>Projects</h3>
-        <br />
-        <div class="work-item">
-          <div class="work-image">
-            <img src="mimic3d.png" alt="Publication thumbnail" style="width: 100%; height: auto" />
-          </div>
-          <div class="work-description">
-            <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
-            <br />
-            <p>We present a new way to generate synthetic data for robot manipulation by replacing objects in existing robot trajectory demonstrations. Given the simulator of the original robot trajectory dataset, we can augment the dataset by replacing the object manipulated by the robot with new generated objects that have a similar affordance to the original, so that the grasping can be reused for the new objects. We then evaluated how well our object generation method performed, and evaluated the performance of a policy trained on the original and augmented datasets.</p>
-            <br />
-            <p>TL;DR: We generate new robotics data for deep learning by replacing the object manipulated by the robot by generating similar yet different objects.</p>
-            <a href="https://drive.google.com/file/d/1T6xi7_2llRFYZPdNGUbbfaxqd2jFLc_y/view?usp=sharing" class="project-link">Project Page</a>
-          </div>
+      
+      <h3>Projects</h3>
+      <div class="work-item">
+        <a href="mimic3d.html" class="card-link"></a>
+        <div class="work-image">
+          <img src="mimic3d.png" alt="Mimic3D project" />
         </div>
-        
+        <div class="work-description">
+          <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
+          <p>TL;DR: We generate new robotics data for deep learning by replacing the object manipulated by the robot by generating similar yet different objects.</p>
+          <div class="skills-container">
+            <span class="tag">3D Object Generation</span>
+            <span class="tag">Robot Manipulation</span>
+            <span class="tag">Data Augmentation</span>
+            <span class="tag">Deep Learning</span>
+          </div>
+          Click this card to access the project page!! <br>
+          <a href="https://drive.google.com/file/d/1T6xi7_2llRFYZPdNGUbbfaxqd2jFLc_y/view?usp=sharing" class="project-link" target="_blank">View Project</a>
+        </div>
+      </div>
+      
+      <div class="work-item">
+        <!-- <a href="https://www.google.com" class="card-link" aria-label="View Safe and Personalized Human Limb Manipulation project"></a> -->
+        <div class="work-image">
+          <img src="prefixtune.png" alt="Course project" />
+        </div>
+        <div class="work-description">
+          <h3>Reimplementing Prefix-Tuning: Optimizing Continuous Prompts for Generation</h3>
+          <p>Developed a ROS-based navigation system for an autonomous mobile robot platform. Implemented SLAM algorithms for mapping, path planning using A* and RRT algorithms, and obstacle avoidance using depth sensors.</p>
+          <p>The system was tested in simulated environments with varying complexity and demonstrated robust performance in dynamic scenarios with moving obstacles.</p>
+          <div class="skills-container">
+            <span class="tag">ROS</span>
+            <span class="tag">SLAM</span>
+            <span class="tag">Path Planning</span>
+            <span class="tag">Computer Vision</span>
+          </div>
+
+          <a href="https://github.com/Mikonooooo/prefix-tuning" class="project-link">Project Github</a>
+          <a href="https://github.com/Mikonooooo/prefix-tuning/blob/main/poster/poster.pdf" class="project-link">Poster</a>
+        </div>
       </div>
     </section>
+    
+    <div class="section-divider"></div>
+
+    <section id="skills">
+      <h2>Technical Skills</h2>
+      <div class="skills-section">
+        <h3>Programming Languages</h3>
+        <div class="skills-container">
+          <span class="tag">Python</span>
+          <span class="tag">C++</span>
+          <span class="tag">MATLAB</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">ROS</span>
+        </div>
+        
+        <h3>Machine Learning</h3>
+        <div class="skills-container">
+          <span class="tag">PyTorch</span>
+          <span class="tag">TensorFlow</span>
+          <span class="tag">Reinforcement Learning</span>
+          <span class="tag">Computer Vision</span>
+        </div>
+        
+        <h3>Robotics</h3>
+        <div class="skills-container">
+          <span class="tag">Motion Planning</span>
+          <span class="tag">Control Systems</span>
+          <span class="tag">SLAM</span>
+          <span class="tag">Robot Manipulation</span>
+          <span class="tag">Simulation</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider"></div>
 
     <section id="contact">
       <h2>Contact</h2>
@@ -221,13 +560,32 @@
         <ul>
           <li>Email: <a href="mailto:ericlhu0@gmail.com">ericlhu0@gmail.com</a></li>
           <li>LinkedIn: <a href="https://linkedin.com/in/ericlehaohu" target="_blank">linkedin.com/in/ericlehaohu</a></li>
+          <li>GitHub: <a href="#" target="_blank">github.com/erichuCornell</a></li>
+          <li>Cornell University, Ithaca, NY</li>
         </ul>
       </div>
     </section>
   </main>
 
+  <footer>
+    <p>© 2025 Eric Hu | Last Updated: May 2025</p>
+  </footer>
+
   <script>
-    // Simple navigation without page reload
+    // Mobile menu functionality
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const closeNavBtn = document.querySelector('.close-nav');
+    const nav = document.querySelector('nav');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.add('active');
+    });
+    
+    closeNavBtn.addEventListener('click', () => {
+      nav.classList.remove('active');
+    });
+    
+    // Smooth scrolling and active nav highlighting
     document.querySelectorAll('nav a').forEach(link => {
       link.addEventListener('click', function(e) {
         e.preventDefault();
@@ -238,12 +596,35 @@
         });
         this.classList.add('active');
         
-        // Show the correct page
-        const targetId = this.getAttribute('href').substring(1);
-        document.querySelectorAll('.page').forEach(page => {
-          page.classList.remove('active');
+        // Smooth scroll to the section
+        const targetId = this.getAttribute('href');
+        document.querySelector(targetId).scrollIntoView({
+          behavior: 'smooth'
         });
-        document.getElementById(targetId).classList.add('active');
+        
+        // Close mobile nav if open
+        nav.classList.remove('active');
+      });
+    });
+    
+    // Highlight active section based on scroll position
+    window.addEventListener('scroll', () => {
+      let current = '';
+      const sections = document.querySelectorAll('section');
+      
+      sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - 150)) {
+          current = section.getAttribute('id');
+        }
+      });
+      
+      document.querySelectorAll('nav a').forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+          link.classList.add('active');
+        }
       });
     });
   </script>
