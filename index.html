@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Eric Hu | Robotics Researcher</title>
+  <title>Eric Hu</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
   <style>
     :root {
@@ -203,6 +203,13 @@
       z-index: 1;
       border-radius: 8px;
     }
+
+    /* Add this to make the project links still clickable */
+    .project-link {
+      position: relative;
+      z-index: 2;
+      pointer-events: auto;
+    }
     
     .cv-button {
       display: inline-block;
@@ -235,6 +242,8 @@
       border-radius: 8px;
       background-color: var(--light-bg);
       transition: var(--transition);
+      position: relative; /* Add this */
+      cursor: pointer; /* Add this to show it's clickable */
     }
     
     .work-item:hover {
@@ -289,6 +298,8 @@
       text-decoration: none;
       border-radius: 4px;
       transition: var(--transition);
+      position: relative;
+      z-index: 2;
     }
     
     .project-link:hover {
@@ -419,9 +430,9 @@
     <div class="logo">
       <h1>Eric Hu</h1>
     </div>
-    <button class="mobile-menu-btn">☰</button>
+    <!-- <button class="mobile-menu-btn">☰</button> -->
     <nav>
-      <button class="close-nav">✕</button>
+      <!-- <button class="close-nav"></button> -->
       <a href="#about" class="active">About</a>
       <a href="#work">Work</a>
       <a href="#skills">Skills</a>
@@ -460,13 +471,14 @@
       
       <h3>Publications</h3>
       <div class="work-item">
-        <a href="#" class="card-link" aria-label="View Safe and Personalized Human Limb Manipulation project"></a>
+        <!-- <a href="#" class="card-link" aria-label="View Safe and Personalized Human Limb Manipulation project"></a> -->
         <div class="work-image">
           <img src="limbrepo.png" alt="Limb manipulation research" />
         </div>
         <div class="work-description">
           <h3>Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving</h3>
           <p><em>Work in Progress</em></p>
+          <p>Team: Eric Hu, Rajat Kumar Jenamani, Tom Silver, Carly Jiang, Nikki Hart, Tapomayukh Bhattacharjee</p>
           <p>TL;DR: We propose a new algorithm for robot-assisted human limb manipulation, along with a environment for future work to test limb manipulation.</p>
           <div class="skills-container">
             <span class="tag">Model Predictive Control</span>
@@ -485,6 +497,7 @@
         </div>
         <div class="work-description">
           <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
+          <p>Team: Eric Hu, Adhitya Polavaram, Minh Nguyen</p>
           <p>TL;DR: We generate new robotics data for deep learning by replacing the object manipulated by the robot by generating similar yet different objects.</p>
           <div class="skills-container">
             <span class="tag">3D Object Generation</span>
@@ -504,13 +517,13 @@
         </div>
         <div class="work-description">
           <h3>Reimplementing Prefix-Tuning: Optimizing Continuous Prompts for Generation</h3>
-          <p>Developed a ROS-based navigation system for an autonomous mobile robot platform. Implemented SLAM algorithms for mapping, path planning using A* and RRT algorithms, and obstacle avoidance using depth sensors.</p>
-          <p>The system was tested in simulated environments with varying complexity and demonstrated robust performance in dynamic scenarios with moving obstacles.</p>
+          <p>Team: Mac Turner, Michael Ngo, Eric Hu, Neeraj Parihar</p>
+          <p>TL;DR: We re-implemented Prefix-Tuning: Optimizing continuous prompts for generation by Xiang Lisa Li and Percy Liang. This paper introduces a finetuning method that requires only tuning only 0.1% of the parameters for comparable if not better performance than full finetuning.</p>
           <div class="skills-container">
-            <span class="tag">ROS</span>
-            <span class="tag">SLAM</span>
-            <span class="tag">Path Planning</span>
-            <span class="tag">Computer Vision</span>
+            <span class="tag">Transformers</span>
+            <span class="tag">HuggingFace</span>
+            <span class="tag">NLP</span>
+            <span class="tag">Deep Learning</span>
           </div>
 
           <a href="https://github.com/Mikonooooo/prefix-tuning" class="project-link">Project Github</a>
@@ -560,7 +573,7 @@
         <ul>
           <li>Email: <a href="mailto:ericlhu0@gmail.com">ericlhu0@gmail.com</a></li>
           <li>LinkedIn: <a href="https://linkedin.com/in/ericlehaohu" target="_blank">linkedin.com/in/ericlehaohu</a></li>
-          <li>GitHub: <a href="#" target="_blank">github.com/erichuCornell</a></li>
+          <li>GitHub: <a href="#" target="_blank">github.com/ericlhu0</a></li>
           <li>Cornell University, Ithaca, NY</li>
         </ul>
       </div>
@@ -569,21 +582,22 @@
 
   <footer>
     <p>© 2025 Eric Hu | Last Updated: May 2025</p>
+    <p>Big thanks to Claude.ai</p>
   </footer>
 
   <script>
     // Mobile menu functionality
-    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
-    const closeNavBtn = document.querySelector('.close-nav');
-    const nav = document.querySelector('nav');
+    // const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    // const closeNavBtn = document.querySelector('.close-nav');
+    // const nav = document.querySelector('nav');<button class="close-nav"></button>
     
-    mobileMenuBtn.addEventListener('click', () => {
-      nav.classList.add('active');
-    });
+    // mobileMenuBtn.addEventListener('click', () => {
+    //   nav.classList.add('active');
+    // });
     
-    closeNavBtn.addEventListener('click', () => {
-      nav.classList.remove('active');
-    });
+    // closeNavBtn.addEventListener('click', () => {
+    //   nav.classList.remove('active');
+    // });
     
     // Smooth scrolling and active nav highlighting
     document.querySelectorAll('nav a').forEach(link => {
@@ -627,6 +641,9 @@
         }
       });
     });
+
+
+    
   </script>
 </body>
 </html>
