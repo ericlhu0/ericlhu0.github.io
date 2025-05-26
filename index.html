@@ -265,6 +265,14 @@
       display: block;
       transition: var(--transition);
     }
+
+    .work-image video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 6px;
+      transition: var(--transition);
+    }
     
     /* .work-image img:hover {
       transform: scale(1.05);
@@ -445,7 +453,7 @@
       <h2>About Me</h2>
       <div class="bio-container">
         <div class="bio-text">
-          <p>Hey there! I'm a junior undergraduate student at Cornell University. I'm currently interested in human-robot interaction and safety using deep learning methods!</p>
+          <p>Hey! I'm a junior undergraduate student at Cornell University. I'm currently interested in human-robot interaction and safety using deep learning methods!</p>
           
           <p>This is a portfolio of my ongoing work and interests in robotics research (click on each project card to see more details!). I hope to showcase both my technical skills and my motivation to contribute meaningfully to the future of human-robot collaboration. Specifically, I have a lot of experience with robotics simulations, deep learning and human-robot interaction. I hope to go to graduate school to continue research in this direction.</p>
           
@@ -476,7 +484,7 @@
       <div class="work-item">
         <!-- <a href="#" class="card-link" aria-label="View Safe and Personalized Human Limb Manipulation project"></a> -->
         <div class="work-image">
-          <img src="limbrepo.png" alt="Limb manipulation research" />
+          <video src="limb_repo_vid.mp4" autoplay playsinline muted loop controls />
         </div>
         <div class="work-description">
           <h3>Safe and Personalized Human Limb Manipulation for Physical Robotic Caregiving</h3>
@@ -496,7 +504,8 @@
       <div class="work-item">
         <a href="mimic3d.html" class="card-link"></a>
         <div class="work-image">
-          <img src="mimic3d.png" alt="Mimic3D project" />
+          <!-- <img src="mimic3d.png" alt="Mimic3D project" /> -->
+          <video src="r3d_video.mov" autoplay playsinline muted loop controls>can't load video</video>
         </div>
         <div class="work-description">
           <h3>Mimic3D: Augmenting Robot Manipulation Training Data with Novel Objects using 3D Object Generation</h3>
