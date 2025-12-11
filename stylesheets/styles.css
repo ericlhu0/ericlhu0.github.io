@@ -50,12 +50,13 @@ header img {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
+  color:#595959;
   background-color: #eeeeee;
   border: 1.5px solid #000000;
   padding: 15px;
   margin-bottom: 20px;
   position: relative;
-  transition: all 0.075s ease;
+  transition: all 0.1s ease;
 }
 
 .pub:hover {
@@ -67,10 +68,17 @@ header img {
   margin: 0;
 }
 
-.pub img {
-  width: 35%;
+.pubthumb {
+  display:flex;
+  flex-direction: column;
   margin-right: 20px;
-  object-fit: contain;
+  flex-shrink: 0;
+  width: 35%;
+}
+
+.pubthumb img {
+  width: 100%;
+  object-fit: cover;
 }
 
 h2 {
@@ -290,9 +298,15 @@ footer {
     flex-direction: column;
   }
 
-  .pub img {
-    width:100%;
-    margin:0 0 10px;
+  .pubthumb {
+    display:flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+  }
+
+  .pubthumb img {
+    margin-bottom: 10px;
   }
 
   header a small {
